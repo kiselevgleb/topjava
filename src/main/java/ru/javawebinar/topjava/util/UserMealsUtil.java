@@ -10,6 +10,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -29,20 +30,16 @@ public class UserMealsUtil {
     public static List<UserMealWithExceed> getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         List<UserMealWithExceed> filteredmealList = new ArrayList<>();
 
-        for (UserMeal u : mealList) {
-            LocalDate uDate = LocalDate.of(u.getDateTime().getYear(), u.getDateTime().getMonthValue(), u.getDateTime().getDayOfMonth());
-            int calories = 0;
-            for (UserMeal uCalories : mealList) {
-                LocalDate uDateCalories = LocalDate.of(uCalories.getDateTime().getYear(), uCalories.getDateTime().getMonthValue(), uCalories.getDateTime().getDayOfMonth());
-                if (uDate.compareTo(uDateCalories) == 0) {
-                    calories += uCalories.getCalories();
-                }
-            }
-            if (TimeUtil.isBetween(LocalTime.of(u.getDateTime().getHour(), u.getDateTime().getMinute()), startTime, endTime)) {
-                filteredmealList.add(new UserMealWithExceed(u.getDateTime(), u.getDescription(), u.getCalories(), calories <= caloriesPerDay));
+        for (UserMeal user : mealList) {
+            int calories = mealList.stream()
+                    .filter(x -> x.getDateTime().getYear() == user.getDateTime().getYear() && x.getDateTime().getMonthValue() == user.getDateTime().getMonthValue() && x.getDateTime().getDayOfMonth() == user.getDateTime().getDayOfMonth())
+                    .map(UserMeal::getCalories)
+                    .mapToInt(i -> i).sum();
+            if (TimeUtil.isBetween(LocalTime.of(user.getDateTime().getHour(), user.getDateTime().getMinute()), startTime, endTime)) {
+                filteredmealList.add(new UserMealWithExceed(user.getDateTime(), user.getDescription(), user.getCalories(), calories <= caloriesPerDay));
             }
         }
         return filteredmealList;
     }
-
 }
+
