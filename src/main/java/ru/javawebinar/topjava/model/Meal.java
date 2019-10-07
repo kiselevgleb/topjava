@@ -9,10 +9,21 @@ public class UserMeal {
 
     private final int calories;
 
-    public UserMeal(LocalDateTime dateTime, String description, int calories) {
+    private String excess;
+
+    public Meal(LocalDateTime dateTime, String description, int calories) {
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
+        this.excess = "green";
+    }
+
+    public String isExcess() {
+        return excess;
+    }
+
+    public void setExcess(String excess) {
+        this.excess = excess;
     }
 
     public LocalDateTime getDateTime() {
@@ -25,5 +36,10 @@ public class UserMeal {
 
     public int getCalories() {
         return calories;
+    }
+
+    public String getDateTimeWithOutT() {
+
+        return dateTime.toString().replace('T', ' ');
     }
 }
