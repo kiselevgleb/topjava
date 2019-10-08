@@ -11,7 +11,7 @@
 <h2>Meals</h2>
 
 <head>
-    <title>List meal</title>
+    <title>List meal </title>
 </head>
 
 <table border="1" bgcolor="#f0f8ff" width="70%" align="center">
