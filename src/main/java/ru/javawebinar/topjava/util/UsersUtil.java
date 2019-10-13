@@ -1,0 +1,60 @@
+package ru.javawebinar.topjava.util;
+
+import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.model.Role;
+import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.to.MealTo;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static ru.javawebinar.topjava.model.Role.ROLE_ADMIN;
+import static ru.javawebinar.topjava.model.Role.ROLE_USER;
+
+public class UsersUtil {
+    public static Set<Role> roleUser=null;
+    public static Set<Role> roleAdmin=null;
+    public static Set<Role> roles=null;
+    {
+        roleUser.add(ROLE_USER);
+        roleAdmin.add(ROLE_ADMIN);
+        roles.add(ROLE_USER);
+        roles.add(ROLE_ADMIN);
+    }
+    public static final List<User> USERS = Arrays.asList(
+            new User(null, "user","1@1.ru", "123", 2000, true, roleUser),
+            new User(null, "admin","2@2.ru", "123", 2500, true, roleAdmin)
+            );
+public static List<User> getSortListUser (List<User> users){
+    Comparator<User> userInitialsComparator = Comparator.comparing(User::getName);
+    Collections.sort(users, userInitialsComparator);
+    return users;
+}
+//    public static List<MealTo> getTos(Collection<Meal> meals, int caloriesPerDay) {
+//        return getFiltered(meals, caloriesPerDay, meal -> true);
+//    }
+
+//    public static List<MealTo> getFilteredTos(Collection<Meal> meals, int caloriesPerDay, LocalTime startTime, LocalTime endTime) {
+//        return getFiltered(meals, caloriesPerDay, meal -> DateTimeUtil.isBetween(meal.getTime(), startTime, endTime));
+//    }
+
+//    private static List<MealTo> getFiltered(Collection<Meal> meals, int caloriesPerDay, Predicate<Meal> filter) {
+//        Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
+//                .collect(
+//                        Collectors.groupingBy(Meal::getDate, Collectors.summingInt(Meal::getCalories))
+//                );
+//        return meals.stream()
+//                .filter(filter)
+//                .map(meal -> createTo(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
+//                .collect(Collectors.toList());
+//    }
+//
+//    private static MealTo createTo(Meal meal, boolean excess) {
+//        return new MealTo(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+//    }
+}
