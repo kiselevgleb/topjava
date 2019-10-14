@@ -27,13 +27,21 @@ public class UserServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.debug("forward to users");
-        int userId = getUserId(request);
+        request.setCharacterEncoding("UTF-8");
+        request.getRequestDispatcher("/users.jsp").forward(request, response);
+
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+//        userId = Integer.parseInt(request.getParameter("id"));
+
         request.getRequestDispatcher("/meals.jsp").forward(request, response);
+
     }
 
-    private int getUserId(HttpServletRequest request) {
-        String paramUserId = Objects.requireNonNull(request.getParameter("id"));
-        return Integer.parseInt(paramUserId);
-    }
+//    private int getUserId(HttpServletRequest request) {
+//        String paramUserId = Objects.requireNonNull(request.getParameter("id"));
+//        return Integer.parseInt(paramUserId);
+//    }
 }
