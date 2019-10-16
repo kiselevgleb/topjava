@@ -13,16 +13,7 @@
 <h2>Users</h2>
 
 <tr>
-    <%--    <td>--%>
-    <%--        <form action="meals" method="get">--%>
-    <%--            <input type="hidden" name="id" value="${1}">--%>
-    <%--            <input type="submit" value="Admin">--%>
-    <%--        </form>--%>
-    <%--        <form action="meals.jsp" method="post">--%>
-    <%--            <input type="hidden" name="id" value="${2}">--%>
-    <%--            <input type="submit" value="User">--%>
-    <%--        </form>--%>
-    <%--    </td>--%>
+
     <td><a href="meals?action=setUser&id=${1}">Admin</a></td>
     <td><a href="meals?action=setUser&id=${2}">User</a></td>
 </tr>
