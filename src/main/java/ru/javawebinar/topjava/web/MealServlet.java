@@ -3,7 +3,6 @@ package ru.javawebinar.topjava.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.repository.inmemory.InMemoryMealRepository;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Objects;
 
 public class MealServlet extends HttpServlet {
@@ -26,7 +24,7 @@ public class MealServlet extends HttpServlet {
 
     private MealRepository repository;
     private UserRepository repositoryUser;
-    int userId = 0;
+    private int userId = 0;
 
     public int getUserId() {
         return userId;
@@ -67,6 +65,7 @@ public class MealServlet extends HttpServlet {
         switch (action == null ? "all" : action) {
             case "setUser":
                 int userIdTemp = Integer.parseInt(request.getParameter("id"));
+//                SecurityUtil.setAuthUserId(userIdTemp);
                 setUserId(userIdTemp);
                 response.sendRedirect("meals");
                 break;
@@ -90,7 +89,7 @@ public class MealServlet extends HttpServlet {
             default:
                 log.info("getAll");
                 request.setAttribute("meals",
-                        MealsUtil.getTos(getUserList(), repository.getAll(getUserId()), MealsUtil.DEFAULT_CALORIES_PER_DAY));
+                        MealsUtil.getTos(repository.getAll(getUserId()), MealsUtil.DEFAULT_CALORIES_PER_DAY));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }
@@ -101,7 +100,4 @@ public class MealServlet extends HttpServlet {
         return Integer.parseInt(paramId);
     }
 
-    private List<User> getUserList() {
-        return repositoryUser.getAll();
-    }
 }
