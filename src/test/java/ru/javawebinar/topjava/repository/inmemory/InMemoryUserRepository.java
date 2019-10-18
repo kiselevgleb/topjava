@@ -30,15 +30,15 @@ public class InMemoryUserRepository implements UserRepository {
         return usersMap.computeIfPresent(user.getId(), (id, oldUser) -> user);
     }
 
-    @Override
-    public boolean delete(int id) {
-        return usersMap.remove(id) != null;
-    }
-
-    @Override
-    public boolean delete(int id) {
-        return usersMap.remove(id) != null;
-    }
+//    @Override
+//    public boolean delete(int id) {
+//        return usersMap.remove(id) != null;
+//    }
+//
+//    @Override
+//    public boolean delete(int id) {
+//        return usersMap.remove(id) != null;
+//    }
 
     @Override
     public boolean delete(int id) {
