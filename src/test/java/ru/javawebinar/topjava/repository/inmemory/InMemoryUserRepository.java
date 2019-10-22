@@ -17,6 +17,9 @@ public class InMemoryUserRepository implements UserRepository {
     public static final int USER_ID = 1;
     public static final int ADMIN_ID = 2;
 
+    public void init() {
+    }
+
     private Map<Integer, User> usersMap = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
 
