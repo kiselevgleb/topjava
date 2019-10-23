@@ -12,8 +12,6 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -42,7 +40,7 @@ public class JdbcMealRepository implements MealRepository {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", meal.getId())
                 .addValue("userId", userId)
-                .addValue("dateTime", Date.from(meal.getDateTime().atZone(ZoneId.systemDefault()).toInstant()))
+                .addValue("dateTime", meal.getDateTime())
                 .addValue("description", meal.getDescription())
                 .addValue("calories", meal.getCalories());
 
@@ -80,7 +78,7 @@ public class JdbcMealRepository implements MealRepository {
     @Override
     public List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
 
-        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id =? AND date_time BETWEEN ? AND ? ORDER BY date_time", ROW_MAPPER, userId, Date.from(startDate.atZone(ZoneId.systemDefault()).toInstant()), Date.from(endDate.atZone(ZoneId.systemDefault()).toInstant()));
+        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id =? AND date_time BETWEEN ? AND ? ORDER BY date_time", ROW_MAPPER, userId, startDate, endDate);
     }
 
 }
