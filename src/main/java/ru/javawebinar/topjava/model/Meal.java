@@ -24,9 +24,6 @@ public class Meal extends AbstractBaseEntity {
 
     public Meal() {
     }
-    public void setId(int id) {
-        super.id = id;
-    }
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
