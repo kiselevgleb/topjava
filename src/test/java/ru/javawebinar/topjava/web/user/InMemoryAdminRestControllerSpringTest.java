@@ -28,7 +28,7 @@ public class InMemoryAdminRestControllerSpringTest {
 
     @Before
     public void setUp() throws Exception {
-        repository.init();
+//        repository.init();
     }
 
     @Test
