@@ -10,21 +10,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-
 @NamedQueries({
 
-// ROW_MAPPER, userId, startDate, endDate);
         @NamedQuery(name = Meal.BETWEEN, query = "SELECT m FROM Meal m WHERE m.user.id=:user_id AND m.dateTime BETWEEN :startDate AND :endDate ORDER BY m.dateTime"),
-        @NamedQuery(name = Meal.ALL, query = "SELECT m FROM Meal m WHERE m.user.id=:user_id ORDER BY m.dateTime")
+        @NamedQuery(name = Meal.ALL, query = "SELECT m FROM Meal m WHERE m.user.id=:user_id ORDER BY m.dateTime"),
 })
 @Entity
-@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date_time"}, name = "meals_unique_user_datetime_idx")})
+@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date_time" }, name = "meals_unique_user_datetime_idx")})
 public class Meal extends AbstractBaseEntity {
-
     public static final String ALL = "Meal.getAll";
     public static final String BETWEEN = "Meal.getBetween";
 
-    @Column(name = "date_time", nullable = false, columnDefinition = "timestamp default now()")
+    @Column(name = "date_time", nullable = false)
     @NotNull
     private LocalDateTime dateTime;
 
@@ -36,9 +33,9 @@ public class Meal extends AbstractBaseEntity {
     @Column(name = "calories", nullable = false, columnDefinition = "int default 1000")
     @Range(min = 10, max = 10000)
     private int calories;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Meal() {
