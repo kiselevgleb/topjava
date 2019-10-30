@@ -67,7 +67,6 @@ public class MealServlet extends HttpServlet {
                 break;
             case "create":
             case "update":
-                int userId = SecurityUtil.authUserId();
                 final Meal meal = "create".equals(action) ?
                         new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000) :
                         mealController.get(getId(request));
