@@ -102,8 +102,9 @@
     </beans>
 
     <beans profile="jdbc">
+
+        <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
     </beans>
-    <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
     <beans profile="jpa">
         <context:component-scan base-package="ru.javawebinar.**.repository.jpa"/>
     </beans>
