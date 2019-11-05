@@ -12,7 +12,7 @@
     <url>http://topjava.herokuapp.com/</url>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>11.0.2</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -124,7 +124,7 @@
         <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-<!--            <scope>runtime</scope>-->
+            <!--            <scope>runtime</scope>-->
             <version>${ehcache.version}</version>
         </dependency>
 
