@@ -22,7 +22,7 @@ public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
     @Query("DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:userId")
     public boolean delete(int id, int userId);
 
-//    public Meal get(int id, int userId);
+    public Meal get(int id, int userId);
 
 //    public List<Meal> getAll(int userId);
 
