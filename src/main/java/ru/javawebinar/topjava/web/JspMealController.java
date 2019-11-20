@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.javawebinar.topjava.model.Meal;
@@ -29,7 +28,7 @@ public class JspMealController {
         return "meals";
     }
 
-    @DeleteMapping("/meals")
+    @PostMapping("/meals/delete")
     public String deleteMeals(HttpServletRequest request) {
         int userId = Integer.parseInt(request.getParameter("userId"));
         int id = Integer.parseInt(request.getParameter("id"));
@@ -37,7 +36,7 @@ public class JspMealController {
         return "redirect:meals";
     }
 
-    @PostMapping("/meals")
+    @PostMapping("/meals/update")
     public String PostMeals(HttpServletRequest request) {
         int userId = Integer.parseInt(request.getParameter("userId"));
         Meal meal = new Meal(

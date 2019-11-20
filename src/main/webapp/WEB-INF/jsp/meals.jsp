@@ -6,33 +6,33 @@
 
 <html>
 <head>
-    <title>Meals</title>
+    <title><spring:message code="common.meals"/></title>
     <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
 <section>
-    <h3><a href="index.jsp">Home</a></h3>
+    <h3><a href="index.jsp"><spring:message code="common.home"/></a></h3>
     <hr/>
-    <h2>Meals</h2>
+    <h2><spring:message code="common.meals"/></h2>
     <form method="get" action="meals">
         <input type="hidden" name="action" value="filter">
         <dl>
-            <dt>From Date:</dt>
+            <dt><spring:message code="common.fromDate"/></dt>
             <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
         </dl>
         <dl>
-            <dt>To Date:</dt>
+            <dt><spring:message code="common.toDate"/></dt>
             <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
         </dl>
         <dl>
-            <dt>From Time:</dt>
+            <dt><spring:message code="common.fromTime"/></dt>
             <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
         </dl>
         <dl>
-            <dt>To Time:</dt>
+            <dt><spring:message code="common.toTime"/></dt>
             <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
         </dl>
-        <button type="submit">Filter</button>
+        <button type="submit"><spring:message code="common.filter"/></button>
     </form>
     <hr/>
     <form method="post" action="meals">
@@ -42,9 +42,9 @@
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Calories</th>
+            <th><spring:message code="common.date"/></th>
+            <th><spring:message code="common.description"/></th>
+            <th><spring:message code="common.calories"/></th>
             <th></th>
             <th></th>
         </tr>
@@ -60,11 +60,11 @@
                 </td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-                <td><form method="delete" action="meals">
+                <td><form method="post" action="meals/delete">
                 <button type="submit"><spring:message code="common.delete"/></button>
                 </form></td>
                 </td>
-                <td><form method="post" action="meals">
+                <td><form method="post" action="/meals/update">
                     <button type="submit"><spring:message code="common.up"/></button>
                 </form></td>
                 </td>
