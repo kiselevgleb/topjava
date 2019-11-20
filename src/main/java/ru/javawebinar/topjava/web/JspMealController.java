@@ -33,7 +33,7 @@ public class JspMealController {
         return "meals";
     }
 
-    @PostMapping("/meals")
+    @GetMapping(value = "filter")
     public String getFilteredMeals(HttpServletRequest request) {
         int userId = Integer.parseInt(request.getParameter("userId"));
         LocalDate startDate = parseLocalDate(request.getParameter("startDate"));
