@@ -10,7 +10,12 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalDate;
+import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalTime;
 
 @Controller
 public class JspMealController {
@@ -25,6 +30,17 @@ public class JspMealController {
     @GetMapping("/meals")
     public String getMeals(Model model) {
         model.addAttribute("meals", service.getAll(SecurityUtil.authUserId()));
+        return "meals";
+    }
+
+    @PostMapping("/meals")
+    public String getFilteredMeals(HttpServletRequest request) {
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        LocalDate startDate = parseLocalDate(request.getParameter("startDate"));
+        LocalDate endDate = parseLocalDate(request.getParameter("endDate"));
+        LocalTime startTime = parseLocalTime(request.getParameter("startTime"));
+        LocalTime endTime = parseLocalTime(request.getParameter("endTime"));
+        request.setAttribute("meals", service.getBetweenDates(startDate, endDate,userId));
         return "meals";
     }
 
@@ -50,4 +66,5 @@ public class JspMealController {
         }
         return "redirect:meals";
     }
+
 }
