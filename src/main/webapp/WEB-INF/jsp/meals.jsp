@@ -7,7 +7,8 @@
 <html>
 <head>
     <title><spring:message code="common.meals"/></title>
-    <link rel="stylesheet" href="../../resources/css/style.css">
+    <link rel="stylesheet" href="/topjava/resources/css/style.css">
+<%--    B:\Java-project\project\topjava\src\main\webapp\resources\css\style.css--%>
 </head>
 <body>
 <section>
@@ -36,7 +37,7 @@
 
     </form>
     <hr/>
-    <form method="post" action="meals">
+    <form method="post" action="mealForm">
         <button type="submit"><spring:message code="common.add"/></button>
     </form>
     <br><br>
@@ -61,14 +62,8 @@
                 </td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-                <td><form method="post" action="meals/delete">
-                <button type="submit"><spring:message code="common.delete"/></button>
-                </form></td>
-                </td>
-                <td><form method="post" action="/meals/update">
-                    <button type="submit"><spring:message code="common.up"/></button>
-                </form></td>
-                </td>
+                <td><a href="mealForm?id=${meal.id}"><spring:message code="common.up"/></a></td>
+                <td><a href="meals/delete?id=${meal.id}"><spring:message code="common.delete"/></a></td>
             </tr>
         </c:forEach>
     </table>

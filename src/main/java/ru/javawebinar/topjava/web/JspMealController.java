@@ -21,7 +21,7 @@ import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalTime;
 public class JspMealController {
     @Autowired
     private MealService service;
-
+    int userId = SecurityUtil.authUserId();
 //    @GetMapping("/")
 //    public String root() {
 //        return "index";
@@ -44,17 +44,18 @@ public class JspMealController {
         return "meals";
     }
 
-    @PostMapping("/meals/delete")
+    @GetMapping("/meals/delete")
     public String deleteMeals(HttpServletRequest request) {
-        int userId = Integer.parseInt(request.getParameter("userId"));
+//        int userId = Integer.parseInt(request.getParameter("userId"));
+//        int id = Integer.parseInt(Objects.requireNonNull(request.getParameter("id")));
         int id = Integer.parseInt(request.getParameter("id"));
         service.delete(id, userId);
-        return "redirect:meals";
+        return "redirect:/meals";
     }
 
-    @PostMapping("/meals/update")
-    public String PostMeals(HttpServletRequest request) {
-        int userId = Integer.parseInt(request.getParameter("userId"));
+    @GetMapping("/mealFormAdd")
+    public String UpMeals(HttpServletRequest request) {
+//        int id = Integer.parseInt(request.getParameter("id"));
         Meal meal = new Meal(
                 LocalDateTime.parse(request.getParameter("dateTime")),
                 request.getParameter("description"),
@@ -64,7 +65,13 @@ public class JspMealController {
         } else {
             service.update(meal, userId);
         }
-        return "redirect:meals";
+        return "redirect:/meals";
     }
-
+    @PostMapping("/mealForm")
+    public String addUser(HttpServletRequest request) {
+//        int userId = Integer.parseInt(request.getParameter("userId"));
+//        SecurityUtil.setAuthUserId(userId);
+        request.setAttribute("meal", new Meal());
+        return "mealForm";
+    }
 }
