@@ -44,13 +44,6 @@ public class MealRestControllerTest extends AbstractControllerTest {
         assertThrows(NotFoundException.class, () -> mealService.get(MEAL1_ID, USER_ID));
     }
 
-    @Test
-    void getAll() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(MEAL7, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1));
-    }
 
     @Test
     void createMeal() throws Exception {
@@ -78,8 +71,17 @@ public class MealRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    void getAll() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(contentJsonMealTo(MEALSTO));
+    }
+
+    @Test
     public void getBetween() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL + "by?startTime<" + MEAL1.getDateTime()+ "by?endTime>" + MEAL1.getDateTime()))
+        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL + "sort?startDateTime=" + MEAL1.getDateTime()+ "endDateTime=" + MEAL1.getDateTime()))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(MEAL1));
