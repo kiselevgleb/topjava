@@ -31,6 +31,8 @@ public class MealTestData {
 
     public static final List<Meal> MEALS = List.of(MEAL7, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1);
     public static final List<MealTo> MEALSTO = getTos(MEALS, DEFAULT_CALORIES_PER_DAY);
+    public static final MealTo MEALTO = MEALSTO.get(0);
+    public static final MealTo MEALTO2 = MEALSTO.get(1);
 
     public static Meal getNew() {
         return new Meal(null, of(2015, Month.JUNE, 1, 18, 0), "Созданный ужин", 300);
@@ -66,6 +68,5 @@ public class MealTestData {
     public static void assertMatchTo(Iterable<MealTo> actual, Iterable<MealTo> expected) {
         assertThat(actual).usingElementComparatorIgnoringFields("user").usingElementComparatorIgnoringFields("excess").isEqualTo(expected);
     }
-
 
 }

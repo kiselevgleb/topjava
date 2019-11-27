@@ -12,6 +12,8 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -80,9 +82,10 @@ public class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void getBetween() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL + "sort?startDateTime=" + MEAL1.getDateTime()+ "endDateTime=" + MEAL1.getDateTime()))
+        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL + "sort?startDateTime=" + MEALTO.getDateTime()+ "&endDateTime=" + MEALTO.getDateTime()))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(MEAL1));
+                .andExpect(contentJsonMealTo(List.of(MEALTO)));
     }
 }
