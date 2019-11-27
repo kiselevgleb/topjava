@@ -66,7 +66,7 @@ public class MealTestData {
         return result -> assertMatchTo(readListFromJsonMvcResult(result, MealTo.class), expected);
     }
     public static void assertMatchTo(Iterable<MealTo> actual, Iterable<MealTo> expected) {
-        assertThat(actual).usingElementComparatorIgnoringFields("user").usingElementComparatorIgnoringFields("excess").isEqualTo(expected);
+        assertThat(actual).usingElementComparatorIgnoringFields("1").isEqualTo(expected);
     }
 
 }
