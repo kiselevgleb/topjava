@@ -77,3 +77,50 @@ function failNoty(jqXHR) {
         layout: "bottomRight"
     }).show();
 }
+
+function makeEditableMeals(ctx) {
+    context = ctx;
+    form = $('#detailsFormMeal');
+    $(".delete").click(function () {
+        if (confirm('Are you sure?')) {
+            deleteRowMeal($(this).attr("id"));
+        }
+    });
+
+    $(document).ajaxError(function (event, jqXHR, options, jsExc) {
+        failNoty(jqXHR);
+    });
+
+    // solve problem with cache in IE: https://stackoverflow.com/a/4303862/548473
+    $.ajaxSetup({cache: false});
+}
+
+function deleteRowMeal(id) {
+    $.ajax({
+        url: context.ajaxUrl + id,
+        type: "DELETE"
+    }).done(function () {
+        updateTableMeal();
+        successNoty("Deleted");
+    });
+}
+function addMeal() {
+    form.find(":input").val("");
+    $("#editRowMeal").modal();
+}
+function saveMeal() {
+    $.ajax({
+        type: "POST",
+        url: context.ajaxUrl,
+        data: form.serialize()
+    }).done(function () {
+        $("#editRowMeal").modal("hide");
+        updateTableMeal();
+        successNoty("Saved");
+    });
+}
+function updateTableMeal() {
+    $.get(context.ajaxUrl, function (data) {
+        context.datatableApiMeal.clear().rows.add(data).draw();
+    });
+}
