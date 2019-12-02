@@ -31,7 +31,7 @@ public class MealUlController extends AbstractMealController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void createOrUpdate(
 //            @RequestParam @Nullable Integer id,
-                               @RequestParam String dateTime1,
+                               @RequestParam LocalDateTime dateTime1,
                                @RequestParam String description,
                                @RequestParam int calories) {
 
