@@ -23,6 +23,7 @@ function add() {
 }
 
 function deleteRow(id) {
+    // var id = super.id;
     $.ajax({
         url: context.ajaxUrl + id,
         type: "DELETE"
