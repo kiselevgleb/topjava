@@ -13,7 +13,7 @@
     <div class="container">
         <h3><spring:message code="meal.title"/></h3>
         <div  id="editRowFilter">
-        <table class="table table-striped" id="datatabledeFilter">
+        <form class="table table-striped" id="datatabledeFilter">
         <div class="modal-body">
                 <input type="hidden" id="idFilter" name="id">
 
@@ -45,7 +45,7 @@
 
 
 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                <button type="button" onclick="form.reset()" class="btn btn-secondary" data-dismiss="modal">
                     <span class="fa fa-close"></span>
                     <spring:message code="common.clean"/>
                 </button>
@@ -56,7 +56,7 @@
 
 
         </div>
-        </table>
+        </form>
         </div>
         <hr>
         <%--    <a href="meals/create"><spring:message code="meal.add"/></a>--%>
