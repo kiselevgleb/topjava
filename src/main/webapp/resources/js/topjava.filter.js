@@ -37,7 +37,19 @@ $(function () {
         }
     );
 });
+var context, form;
 
+function makeEditable(ctx) {
+    context = ctx;
+    form = $('#datatabledeFilter');
+
+    $(document).ajaxError(function (event, jqXHR, options, jsExc) {
+        failNoty(jqXHR);
+    });
+
+    // solve problem with cache in IE: https://stackoverflow.com/a/4303862/548473
+    $.ajaxSetup({cache: false});
+}
 function sort() {
     $.ajax({
         type: "GET",

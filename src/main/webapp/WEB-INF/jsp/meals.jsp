@@ -7,12 +7,13 @@
 <body>
 <script type="text/javascript" src="resources/js/topjava.common.js" defer></script>
 <script type="text/javascript" src="resources/js/topjava.meals.js" defer></script>
+<script type="text/javascript" src="resources/js/topjava.filter.js" defer></script>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
 <div class="jumbotron pt-4">
     <div class="container">
         <h3><spring:message code="meal.title"/></h3>
-        <div  id="editRowFilter">
+
         <form class="table table-striped" id="datatabledeFilter">
         <div class="modal-body">
                 <input type="hidden" id="idFilter" name="id">
@@ -43,8 +44,6 @@
                                    placeholder="<spring:message code="meal.endTime"/>">
                         </div>
 
-
-
                 <button type="button" onclick="form.reset()" class="btn btn-secondary" data-dismiss="modal">
                     <span class="fa fa-close"></span>
                     <spring:message code="common.clean"/>
@@ -54,10 +53,8 @@
                     <spring:message code="meal.filter"/>
                 </button>
 
-
         </div>
         </form>
-        </div>
         <hr>
         <%--    <a href="meals/create"><spring:message code="meal.add"/></a>--%>
         <button class="btn btn-primary" onclick="add()">
