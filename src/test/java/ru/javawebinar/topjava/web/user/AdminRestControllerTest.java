@@ -4,13 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import ru.javawebinar.topjava.TestUtil;
 import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
-import ru.javawebinar.topjava.web.json.JsonUtil;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,10 +20,12 @@ import static ru.javawebinar.topjava.UserTestData.*;
 
 class AdminRestControllerTest extends AbstractControllerTest {
 
-    private static final String REST_URL = AdminRestController.REST_URL + '/';
-
     @Autowired
     private UserService userService;
+
+    AdminRestControllerTest() {
+        super(AdminRestController.REST_URL);
+    }
 
     @Test
     void get() throws Exception {
@@ -33,7 +34,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(ADMIN));
+                .andExpect(USER_MATCHERS.contentJson(ADMIN));
     }
 
     @Test
@@ -70,7 +71,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
         perform(doPut(USER_ID).jsonBody(updated).basicAuth(ADMIN))
                 .andExpect(status().isNoContent());
 
-        assertMatch(userService.get(USER_ID), updated);
+        USER_MATCHERS.assertMatch(userService.get(USER_ID), updated);
     }
 
     @Test
@@ -79,11 +80,11 @@ class AdminRestControllerTest extends AbstractControllerTest {
         ResultActions action = perform(doPost().jsonBody(newUser).basicAuth(ADMIN))
                 .andExpect(status().isCreated());
 
-        User created = readFromJson(action, User.class);
+        User created = TestUtil.readFromJson(action, User.class);
         Integer newId = created.getId();
         newUser.setId(newId);
-        assertMatch(created, newUser);
-        assertMatch(userService.get(newId), newUser);
+        USER_MATCHERS.assertMatch(created, newUser);
+        USER_MATCHERS.assertMatch(userService.get(newId), newUser);
     }
 
     @Test
@@ -91,7 +92,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
         perform(doGet().basicAuth(ADMIN))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(ADMIN, USER));
+                .andExpect(USER_MATCHERS.contentJson(ADMIN, USER));
     }
 
     @Test

@@ -2,13 +2,16 @@ package ru.javawebinar.topjava.web;
 
 import org.junit.jupiter.api.Test;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static ru.javawebinar.topjava.UserTestData.ADMIN;
 import static ru.javawebinar.topjava.UserTestData.USER;
 
 class RootControllerTest extends AbstractControllerTest {
+
+    RootControllerTest() {
+        super("");
+    }
 
     @Test
     void getUsers() throws Exception {
