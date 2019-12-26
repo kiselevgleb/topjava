@@ -18,10 +18,8 @@ function enable(chkbox, id) {
 // $(document).ready(function () {
 $(function () {
     makeEditable({
-            ajaxUrl: "ajax/admin/users/",
-            datatableApi: $("#datatable").DataTable({
-                "paging": false,
-                "info": true,
+            ajaxUrl: userAjaxUrl,
+            datatableOpts: {
                 "columns": [
                     {
                         "data": "name"
