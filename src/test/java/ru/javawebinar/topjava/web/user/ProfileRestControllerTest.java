@@ -23,15 +23,21 @@ class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     void get() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL))
+        perform(doGet().basicAuth(USER))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(USER));
     }
 
     @Test
+    void getUnAuth() throws Exception {
+        perform(doGet())
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
     void delete() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete(REST_URL))
+        perform(doDelete().basicAuth(USER))
                 .andExpect(status().isNoContent());
         assertMatch(userService.getAll(), ADMIN);
     }
