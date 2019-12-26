@@ -28,8 +28,8 @@ class RootControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void testMeals() throws Exception {
-        mockMvc.perform(get("/meals"))
+    void getMeals() throws Exception {
+        perform(doGet("meals").auth(USER))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("meals"))
