@@ -19,7 +19,7 @@
                 <input type="hidden" id="idFilter" name="id">
 
                         <div class="form-group">
-                            <label for="startDate" class="col-form-label"><spring:message
+                            <label for="startDate" class="col-sm-2"><spring:message
                                     code="meal.startDate"/></label>
                             <input type="date" class="form-control" id="startDate" name="startDate"
                                    placeholder="<spring:message code="meal.startDate"/>">
